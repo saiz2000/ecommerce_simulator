@@ -45,8 +45,7 @@ while (selectedProduct != 0) {
 alert("Your total purchase amount is: $" + totalCost)*/
 
 
-/*alert("Please enter the number of the product you would like to purchase. If you are finished, enter 'ESC'.")
-let selectedProduct = Number(prompt("Select the desired sneaker's ID: "))*/
+// SECOND IMPLEMMENTATION //
 
 const sneakers = [
     {
