@@ -131,7 +131,7 @@ while (selectedSneaker !== 0) {
         )
         if (selectedQuantity > 0) {
             addItemToCart(selectedSneakerObj, selectedQuantity)
-            console.table(cart.items)
+            console.log(cart.items)
         } else {
             alert("Invalid quantity. Please try again.")
         }
