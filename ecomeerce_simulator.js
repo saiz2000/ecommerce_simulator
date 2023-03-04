@@ -121,6 +121,7 @@ let selectedSneaker = Number(prompt("1 - Jordan(retro 4) $130.0, 2 - nike(force 
 )
 
 let selectedQuantity
+let attempts = 0
 
 while (selectedSneaker !== 0) {
     const selectedSneakerObj = sneakers.find((sneakers) => sneakers.id === selectedSneaker)
@@ -137,7 +138,7 @@ while (selectedSneaker !== 0) {
     } else {
         alert("Invalid selection. Please try again.")
     }
-    selectedProduct = Number(prompt("1 - Jordan(retro 4) $130.0, 2 - nike(force one) $90.00, 3 - adidas(superstar) $110.00, 4 - Adidas(yessy'zebra') $110.00.  If you are finished, enter '0'.'"))
+    selectedSneaker = Number(prompt("1 - Jordan(retro 4) $130.0, 2 - nike(force one) $90.00, 3 - adidas(superstar) $110.00, 4 - Adidas(yessy'zebra') $110.00.  If you are finished, enter '0'.'"))
 }
 
 alert(`Your total purchase amount is: $${cart.totalCost}`)
