@@ -1,14 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sneakers Shopping Cart Simulator</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <script src="snekaer_shopping_cart.js">
-        
-    </script>
+    <div class="container">
+        <!-- Header -->
+        <header class="row">
+            <div class="col">
+                <h1>Olympic shoes</h1>
+            </div>
+        </header>
+
+        <!-- Product list -->
+        <section id="product-list" class="row">
+            <div class="col">
+                <h2>Sneakers</h2>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="img/sneaker1.jpg" class="card-img-top" alt="Sneaker 1" id="img">
+                            <div class="card-body">
+                                <h4 class="card-title">Jordan retro 4</h4>
+                                <p class="card-text">$100</p>
+                                <p class="card-text">1 in stock </p>
+                                <button type="button" class="btn btn-primary btn-block" data-product-id="1">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="img/sneaker2.jpg" class="card-img-top" alt="Sneaker 2" id="img">
+                            <div class="card-body">
+                                <h4 class="card-title">Nike force one</h4>
+                                <p class="card-text">$120</p>
+                                <p class="card-text">2 in stock</p>
+                                <button type="button" class="btn btn-primary btn-block" data-product-id="2">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 shadow-sm">
+                            <img src="img/sneaker3.jpg" class="card-img-top" alt="Sneaker 3" id="img">
+                            <div class="card-body">
+                                <h4 class="card-title">Adidas superstar</h4>
+                                <p class="card-text">$90</p>
+                                <p class="card-text">3 in stock</p>
+                                <button type="button" class="btn btn-primary btn-block" data-product-id="3">Add to cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cart -->
+        <section id="cart" class="row">
+            <div class="col">
+                <h2>Cart</h2>
+                <table id="cart-table" class="table">
+                    <thead>
+                        <tr>
+                            <th>Image</th>
+                            <th>brand</th>
+                            <th>Price</th>
+                            <th>Stock </th>
+                            <th>quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cart-items"></tbody>
+                </table>
+                <ul id="cart-items" class="list-group mb-3"></ul>
+                <p id="cart-total" class="lead">Total: $0</p>
+                <button id="clear-cart" class="btn btn-danger">Clear cart</button>
+                <button id="checkout" class="btn btn-success">Checkout</button>
+            </div>
+        </section>
+    </div>
+    <script src="sneaker_shopping_cart.js"></script>
 </body>
 </html>

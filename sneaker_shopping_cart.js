@@ -1,4 +1,4 @@
-// SIMPLE SIMULADOR ECOMMERCE 
+// SIMPLE SIMULADOR ECOMMERCE  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 /*alert("Please enter the number of the product you would like to purchase. If you are finished, enter '0'.")
@@ -45,9 +45,13 @@ while (selectedProduct != 0) {
 alert("Your total purchase amount is: $" + totalCost)*/
 
 
-// SECOND IMPLEMMENTATION //
 
-const sneakers = [
+
+
+
+// SECOND IMPLEMMENTATION // /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+/*const sneakers = [
     {
         id: 1,
         brand: 'jordan',
@@ -81,22 +85,7 @@ const sneakers = [
 const cart = {
     items: [],
     totalCost: 0
-    /*sneakersList: [],*/
 }
-
-/*const UserObject = {
-    name: prompt('enter your name'),
-    email: prompt('enter your email'),
-    address: prompt('enter your adress'),
-    pymtMethod: prompt('enter your payment method'),
-}*/
-
-/*const OrderObject = {
-    user: '',
-    sneakers: [],
-    totalPrice: 0,
-    status: ''
-}*/
 
 
 const addItemToCart = (item, quantity) => {
@@ -111,11 +100,7 @@ const addItemToCart = (item, quantity) => {
     cart.totalCost += item.price * quantity;
 }
 
-/*const displaySneakers = () => {
-    for (sneaker of SneakerObjects) {
-        console.log(sneaker)
-    }
-}*/
+
 alert("Please enter the number of the sneaker you would like to purchase. If you are finished, enter '0'.")
 let selectedSneaker = Number(prompt("1 - Jordan(retro 4) $130.0, 2 - nike(force one) $90.00, 3 - adidas(superstar) $110.00, 4 - Adidas(yessy'zebra') $110.00.  If you are finished, enter '0'.'")
 )
@@ -141,7 +126,110 @@ while (selectedSneaker !== 0) {
     selectedSneaker = Number(prompt("1 - Jordan(retro 4) $130.0, 2 - nike(force one) $90.00, 3 - adidas(superstar) $110.00, 4 - Adidas(yessy'zebra') $110.00.  If you are finished, enter '0'.'"))
 }
 
-alert(`Your total purchase amount is: $${cart.totalCost}`)
+alert(`Your total purchase amount is: $${cart.totalCost}`)*/
+
+
+
+
+
+
+// third implementation // ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+const sneakers = [
+    {
+        id: 1,
+        model: 'Jordan retro 4',
+        price: 130.0,
+        stock: 1
+    },
+    {
+        id: 2,
+        model: 'force one',
+        price: 90.00,
+        stock: 4
+    },
+    {
+        id: 3,
+        model: 'superstar',
+        price: 110.00,
+        stock: 3
+    }
+];
+
+let cart = [];
+
+// capture the buttons 
+const buyButtons = document.querySelectorAll(".btn-block")
+
+// function to add a product to the cart
+const addToCart = (e) => {
+    // get the product id from the data-product-id attribute of the button
+    const productId = parseInt(e.target.getAttribute("data-product-id"))
+
+    // find the product in the sneakers array
+    const product = sneakers.find(sneaker => sneaker.id === productId)
+
+    // add the product to the cart array
+    if (product && product.stock > 0) {
+        cart.push(product)
+        product.stock -=
+        console.log(`Product ${product.model} added to cart.`);
+        console.log(`Cart:`, cart)
+
+        // save cart to local storage
+        const cartJSON = JSON.stringify(cart)
+        localStorage.setItem("cart", cartJSON)
+
+        // update cart on the page
+        updateCart()
+    }
+};
+
+// add event listener to each "Buy" button
+for (const button of buyButtons) {
+    button.addEventListener("click", addToCart)
+}
+
+// function to update the cart display on the page
+const updateCart = () => {
+
+    const cartTable = document.getElementById("cart-table")
+    const tbody = cartTable.getElementsByTagName("tbody")[0]
+    total = 0
+
+    tbody.innerHTML = ""    
+
+    for (const product of cart) {
+
+        const row = document.createElement("tr")
+        
+        const imgTd = document.createElement("td")
+
+        let img = document.getElementById("img").scr
+
+        imgTd.append(img)
+        row.append(imgTd)
+
+        const brandTd = document.createElement("td")
+        brandTd.textContent = product.model
+        row.append(brandTd)
+
+        const PriceTd = document.createElement("td")
+        PriceTd.textContent = product.price
+        row.append(PriceTd)
+
+        const stockTd = document.createElement("td")
+        stockTd.textContent = product.stock
+        row.append(stockTd)
+
+        tbody.append(row)
+
+        total += product.price
+    }
+}
+
+
+
 
 
 
