@@ -137,18 +137,21 @@ alert(`Your total purchase amount is: $${cart.totalCost}`)*/
 
 const sneakers = [
     {
+        Image: document.getElementById("img").src,
         id: 1,
         model: 'Jordan retro 4',
         price: 130.0,
         stock: 1
     },
     {
+        Image: document.getElementById("img2").src,
         id: 2,
         model: 'force one',
         price: 90.00,
         stock: 4
     },
     {
+        Image: document.getElementById("img3").src,
         id: 3,
         model: 'superstar',
         price: 110.00,
@@ -190,9 +193,17 @@ for (const button of buyButtons) {
     button.addEventListener("click", addToCart)
 }
 
+
+// retreive data:
+/*let cartJSON  = localStorage.getItem(cart)
+retreiving_data = JSON.parse(cartJSON )
+console.log(retreiving_data)*/
+
+
 // function to update the cart display on the page
 const updateCart = () => {
 
+    
     const cartTable = document.getElementById("cart-table")
     const tbody = cartTable.getElementsByTagName("tbody")[0]
     total = 0
@@ -203,11 +214,9 @@ const updateCart = () => {
 
         const row = document.createElement("tr")
         
+
         const imgTd = document.createElement("td")
-
-        let img = document.getElementById("img").scr
-
-        imgTd.append(img)
+        imgTd.textContent = product.Image
         row.append(imgTd)
 
         const brandTd = document.createElement("td")
