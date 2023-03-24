@@ -176,7 +176,7 @@ const addToCart = (e) => {
     if (product && product.stock > 0) {
         cart.push(product)
         product.stock -=
-        console.log(`Product ${product.model} added to cart.`);
+            console.log(`Product ${product.model} added to cart.`);
         console.log(`Cart:`, cart)
 
         // save cart to local storage
@@ -194,7 +194,7 @@ for (const button of buyButtons) {
 }
 
 
-// retreive data:
+// retreive data
 /*let cartJSON  = localStorage.getItem(cart)
 retreiving_data = JSON.parse(cartJSON )
 console.log(retreiving_data)*/
@@ -203,21 +203,25 @@ console.log(retreiving_data)*/
 // function to update the cart display on the page
 const updateCart = () => {
 
-    
+
     const cartTable = document.getElementById("cart-table")
     const tbody = cartTable.getElementsByTagName("tbody")[0]
     total = 0
 
-    tbody.innerHTML = ""    
+    tbody.innerHTML = ""
 
     for (const product of cart) {
 
         const row = document.createElement("tr")
-        
+
 
         const imgTd = document.createElement("td")
-        imgTd.textContent = product.Image
-        row.append(imgTd)
+        const img = document.createElement("img")
+        img.src = product.Image
+        img.style.width = "100px"  // Set the width of the image to 200 pixels
+        img.style.height = "auto" // Automatically adjust the height to maintain the aspect ratio
+        imgTd.appendChild(img)   // en este caso, la rason por la que uso apenChild es poque  es basicamente un sitaxys antiguo que funciona en browsesers viejos
+        row.appendChild(imgTd)
 
         const brandTd = document.createElement("td")
         brandTd.textContent = product.model
