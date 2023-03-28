@@ -148,7 +148,7 @@ const sneakers = [
         id: 2,
         model: 'force one',
         price: 90.00,
-        stock: 4
+        stock: 2
     },
     {
         Image: document.getElementById("img3").src,
@@ -159,7 +159,8 @@ const sneakers = [
     }
 ];
 
-let cart = [];
+let cart = []
+let quantity = 0
 
 // capture the buttons 
 const buyButtons = document.querySelectorAll(".btn-block")
@@ -175,16 +176,19 @@ const addToCart = (e) => {
     // add the product to the cart array
     if (product && product.stock > 0) {
         cart.push(product)
-        product.stock -=
-            console.log(`Product ${product.model} added to cart.`);
+        product.stock = product.stock - 1
+        console.log(`Product ${product.model} added to cart.`);
         console.log(`Cart:`, cart)
-
         // save cart to local storage
         const cartJSON = JSON.stringify(cart)
         localStorage.setItem("cart", cartJSON)
-
+        if (product) {
+            quantity += 1
+        }
         // update cart on the page
-        updateCart()
+        updateCart()        
+    } else {
+        alert('producto no existente, o no disponible en stock')
     }
 };
 
@@ -235,9 +239,11 @@ const updateCart = () => {
         stockTd.textContent = product.stock
         row.append(stockTd)
 
-        tbody.append(row)
+        const quanityTd = document.createElement("td")
+        quanityTd.textContent = quantity
+        row.append(quanityTd)
 
-        total += product.price
+        tbody.append(row)
     }
 }
 
