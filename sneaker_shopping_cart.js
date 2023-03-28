@@ -141,26 +141,28 @@ const sneakers = [
         id: 1,
         model: 'Jordan retro 4',
         price: 130.0,
-        stock: 1
+        stock: 1,
+        quantity: 0
     },
     {
         Image: document.getElementById("img2").src,
         id: 2,
         model: 'force one',
         price: 90.00,
-        stock: 2
+        stock: 2,
+        quantity: 0
     },
     {
         Image: document.getElementById("img3").src,
         id: 3,
         model: 'superstar',
         price: 110.00,
-        stock: 3
+        stock: 3,
+        quantity: 0
     }
 ];
 
 let cart = []
-let quantity = 0
 
 // capture the buttons 
 const buyButtons = document.querySelectorAll(".btn-block")
@@ -182,13 +184,19 @@ const addToCart = (e) => {
         // save cart to local storage
         const cartJSON = JSON.stringify(cart)
         localStorage.setItem("cart", cartJSON)
-        if (product) {
-            quantity += 1
+        // find the product in the cart array
+        const cartProduct = cart.find(item => item.id === productId)
+        if (cartProduct) {
+            // update quantity if product is already in the cart
+            cartProduct.quantity += 1
+        } else {
+            // add product to cart with quantity 1 if it's not already in the cart
+            cart.push({ ...product, quantity: 1 })
         }
         // update cart on the page
-        updateCart()        
+        updateCart()
     } else {
-        alert('producto no existente, o no disponible en stock')
+        alert('producto no disponible en stock')
     }
 };
 
@@ -240,7 +248,7 @@ const updateCart = () => {
         row.append(stockTd)
 
         const quanityTd = document.createElement("td")
-        quanityTd.textContent = quantity
+        quanityTd.textContent = product.quantity
         row.append(quanityTd)
 
         tbody.append(row)
