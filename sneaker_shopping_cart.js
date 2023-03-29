@@ -206,12 +206,6 @@ for (const button of buyButtons) {
 }
 
 
-// retreive data
-/*let cartJSON  = localStorage.getItem(cart)
-retreiving_data = JSON.parse(cartJSON )
-console.log(retreiving_data)*/
-
-
 // function to update the cart display on the page
 const updateCart = () => {
 
@@ -252,6 +246,14 @@ const updateCart = () => {
         row.append(quanityTd)
 
         tbody.append(row)
+
+        if (cart.filter(sneaker => sneaker.id === product.id).length > 1) {
+            console.log("producto duplicado")
+            const validator = true
+            if(validator == true) {
+                
+            }
+        }
     }
 }
 
