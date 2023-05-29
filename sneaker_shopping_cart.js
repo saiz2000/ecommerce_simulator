@@ -170,35 +170,35 @@ const buyButtons = document.querySelectorAll(".btn-block")
 // function to add a product to the cart
 const addToCart = (e) => {
     // get the product id from the data-product-id attribute of the button
-    const productId = parseInt(e.target.getAttribute("data-product-id"))
+    const productId = parseInt(e.target.getAttribute("data-product-id"));
 
     // find the product in the sneakers array
-    const product = sneakers.find(sneaker => sneaker.id === productId)
+    const product = sneakers.find((sneaker) => sneaker.id === productId);
 
-    // add the product to the cart array
+    // check if the product is already in the cart
+    const cartProductIndex = cart.findIndex((item) => item.id === productId);
+
     if (product && product.stock > 0) {
-        cart.push(product)
-        product.stock = product.stock - 1
-        console.log(`Product ${product.model} added to cart.`);
-        console.log(`Cart:`, cart)
-        // save cart to local storage
-        const cartJSON = JSON.stringify(cart)
-        localStorage.setItem("cart", cartJSON)
-        // find the product in the cart array
-        const cartProduct = cart.find(item => item.id === productId)
-        if (cartProduct) {
-            // update quantity if product is already in the cart
-            cartProduct.quantity += 1
+        // if the product is already in the cart, update its quantity
+        if (cartProductIndex !== -1) {
+            cart[cartProductIndex].quantity += 1;
         } else {
-            // add product to cart with quantity 1 if it's not already in the cart
-            cart.push({ ...product, quantity: 1 })
+            // add the product to the cart array
+            cart.push({ ...product, quantity: 1 });
         }
-        // update cart on the page
-        updateCart()
+        // update the product stock and save the cart to local storage
+        product.stock -= 1;
+        const cartJSON = JSON.stringify(cart);
+        localStorage.setItem("cart", cartJSON);
+        console.log(`Product ${product.model} added to cart.`);
+        console.log(`Cart:`, cart);
+        // update the cart display on the page
+        updateCart();
     } else {
-        alert('producto no disponible en stock')
+        alert("producto no disponible en stock");
     }
 };
+
 
 // add event listener to each "Buy" button
 for (const button of buyButtons) {
@@ -246,16 +246,27 @@ const updateCart = () => {
         row.append(quanityTd)
 
         tbody.append(row)
-
-        if (cart.filter(sneaker => sneaker.id === product.id).length > 1) {
-            console.log("producto duplicado")
-            const validator = true
-            if(validator == true) {
-                
-            }
-        }
     }
+    let clearBtn = document.querySelector(".btn-danger");
+
+    clearBtn.addEventListener("click", function () {
+        // reset the cart array
+        cart = [];
+
+        // reset the product quantities and stock
+        for (let i = 0; i < sneakers.length; i++) {
+            sneakers[i].quantity = 0;
+            sneakers[i].stock = 3; // assuming that the maximum stock for all products is 3
+        }
+
+        // clear the cart from local storage
+        localStorage.removeItem("cart");
+
+        // update the cart display
+        updateCart();
+    });
 }
+
 
 
 
